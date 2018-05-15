@@ -65,6 +65,7 @@ CKEDITOR.editorConfig = function( config ) {
 		'tableselection,' +
 		'tabletools,' +
 		'templates,' +
+		'placeholder,' +
 		'toolbar,' +
 		'undo,' +
 		'uploadimage,' +
