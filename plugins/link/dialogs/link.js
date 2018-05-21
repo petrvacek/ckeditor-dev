@@ -149,7 +149,7 @@
 		// Handles the event when the "Type" selection box is changed.
 		var linkTypeChanged = function() {
 				var dialog = this.getDialog(),
-					partIds = [ 'urlOptions', 'anchorOptions', 'emailOptions' ],
+					partIds = [ 'urlOptions', 'anchorOptions', 'emailOptions','tplOptions' ],
 					typeValue = this.getValue(),
 					uploadTab = dialog.definition.getContents( 'upload' ),
 					uploadInitiallyHidden = uploadTab && uploadTab.hidden;
@@ -245,7 +245,8 @@
 					items: [
 						[ linkLang.toUrl, 'url' ],
 						[ linkLang.toAnchor, 'anchor' ],
-						[ linkLang.toEmail, 'email' ]
+						[ linkLang.toEmail, 'email' ],
+                        [ 'Odkaz z proměnné', 'tpl' ] // @ todo translate
 					],
 					onChange: linkTypeChanged,
 					setup: function( data ) {
@@ -535,7 +536,74 @@
 						if ( !this.getDialog().getContentElement( 'info', 'linkType' ) )
 							this.getElement().hide();
 					}
-				} ]
+				},
+                    {
+                        type: 'vbox',
+                        id: 'tplOptions',
+                        padding: 1,
+                        children: [ {
+							type: 'select',
+                            id: 'tplAddress',
+                            label: 'Odkaz z proměnné',
+                            required: true,
+                            validate: function() {
+                                var dialog = this.getDialog();
+
+                                if ( !dialog.getContentElement( 'info', 'linkType' ) || dialog.getValueOf( 'info', 'linkType' ) != 'tpl' )
+                                    return true;
+
+                                var func = CKEDITOR.dialog.validate.notEmpty( 'Zvolte proměnnou' ); // @todo translate
+                                return func.apply( this );
+                            },
+                            setup: function( data ) {
+								var select = this;
+								select.clear();
+
+								var dialog = this.getDialog();
+								var editor = dialog.getParentEditor();
+								var avars = editor.config.avars;
+
+								avars.forEach(function(el){
+                                    if(el.type ==='url') {
+                                        select.add(el.text, el.code);
+                                    }
+								});
+
+                                if(data.tplCode){
+                                    this.setValue(data.tplCode);
+                                }
+                                this.focus();
+
+                            },
+                            commit: function( data ) {
+                            	data.tplCode = this.getValue();
+                            },
+							onChange: function(evt){
+								/*var element = this.getElement();
+								var next = element.getNext();*/
+								//console.log('next',this);
+                                var dialog = this.getDialog();
+                                var editor = dialog.getParentEditor();
+                                var avars = editor.config.avars;
+                                avars.forEach(function(el){
+                                	if(el.code==evt.data.value){
+                                		console.log('el',el);
+										//next.setValue("AAAAAAAAA "+el.text);
+                                		return true;
+									}
+								});
+							},
+                            items : [  ]
+                        }],
+                        setup: function() {
+                            if ( !this.getDialog().getContentElement( 'info', 'linkType' ) )
+                                this.getElement().hide();
+                        }
+                    },{
+                        type: 'html',
+                        html: '<h3>This is some sample HTML content.</h3>'
+                    }
+                    ]
 			},
 			{
 				id: 'target',
@@ -937,6 +1005,23 @@
 				}
 
 				var data = plugin.parseLinkAttributes( editor, firstLink );
+                //var dataCopy = $.extend({}, data);
+                /*var dataCopy = JSON.parse(JSON.stringify(data));
+				if (data.type == "tpl") {
+						dataCopy.type = "url";
+						//dataCopy.url.protocol = "cmspage://";
+						dataCopy.url.url = data.tpl.code;
+					}
+					console.log("X",data,dataCopy);*/
+
+				var matches = null;
+                if (data.type == "url" && (matches = data.url.url.match(/^\[\[([^\[\]])+\]\]/))) {
+                    data.type = "tpl";
+                    data.tplCodeBracket =  matches[0];
+                    data.tplCode =  matches[0].slice(2, -2);
+                    data.url = {/*protocol : "http://",*/ url : matches[0]};
+                    //console.log('onShow, data',data);
+                }
 
 				// Here we'll decide whether or not we want to show Display Text field.
 				if ( elements.length <= 1 && plugin.showDisplayTextForElement( firstLink, editor ) ) {
