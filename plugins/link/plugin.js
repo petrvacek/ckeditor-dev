@@ -605,9 +605,8 @@
 			// Compose the URL.
 			switch ( data.type ) {
 				case 'tpl':
-					//console.log("data dump",data);
                     set[ 'data-cke-saved-href' ] = '[['+data.tplCode+']]';
-					break;
+                    break;
 				case 'url':
 					var protocol = ( data.url && data.url.protocol !== undefined ) ? data.url.protocol : 'http://',
 						url = ( data.url && CKEDITOR.tools.trim( data.url.url ) ) || '';

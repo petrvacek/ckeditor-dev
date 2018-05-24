@@ -41,8 +41,29 @@
 				// Use link URL as text with a collapsed cursor.
 				if ( range.collapsed ) {
 					// Short mailto link text view (https://dev.ckeditor.com/ticket/5736).
-					text = new CKEDITOR.dom.text( data.linkText || ( data.type == 'email' ?
+					/*text = new CKEDITOR.dom.text( data.linkText || ( data.type == 'email' ?
 						data.email.address : attributes.set[ 'data-cke-saved-href' ] ), editor.document );
+*/
+					var x = data.linkText || ( data.type == 'email' ?
+						data.email.address : attributes.set[ 'data-cke-saved-href' ] );
+                    text = new CKEDITOR.dom.element( 'span' );
+                    /*text.setHtml('<span class="cke_avars">'+x+'</span>');*/
+
+                    var valid = true;
+                    var code = x.slice(2,-2);
+                    var innerElement = new CKEDITOR.htmlParser.element('span', {
+                            'class'     : 'cke_avars ' + (!valid ? ' invalid' : ''),
+                            'data-avar' : code
+                        });
+
+                    // Adds placeholder identifier as innertext.
+                    //innerElement.add(new CKEDITOR.htmlParser.text('[[' + x + ']]'));
+                    innerElement.add(new CKEDITOR.htmlParser.text(x));
+                    var w = editor.widgets.wrapElement(innerElement, 'avars');
+
+                    text.setHtml(w.getHtml());
+
+                    //text = '<span class="cke_avars">'+text+'</span>';
 					range.insertNode( text );
 					range.selectNodeContents( text );
 				} else if ( initialLinkText !== data.linkText ) {
@@ -246,7 +267,7 @@
 						[ linkLang.toUrl, 'url' ],
 						[ linkLang.toAnchor, 'anchor' ],
 						[ linkLang.toEmail, 'email' ],
-                        [ 'Odkaz z proměnné', 'tpl' ] // @ todo translate
+                        [ linkLang.toTpl, 'tpl' ]
 					],
 					onChange: linkTypeChanged,
 					setup: function( data ) {
@@ -272,7 +293,7 @@
 								[ 'http://\u200E', 'http://' ],
 								[ 'https://\u200E', 'https://' ],
 								[ 'ftp://\u200E', 'ftp://' ],
-								[ 'news://\u200E', 'news://' ],
+								//[ 'news://\u200E', 'news://' ],
 								[ linkLang.other, '' ]
 							],
 							setup: function( data ) {
@@ -541,10 +562,11 @@
                         type: 'vbox',
                         id: 'tplOptions',
                         padding: 1,
+						width:'100%',
                         children: [ {
 							type: 'select',
                             id: 'tplAddress',
-                            label: 'Odkaz z proměnné',
+                            label: linkLang.tplLabel,
                             required: true,
                             validate: function() {
                                 var dialog = this.getDialog();
@@ -552,7 +574,7 @@
                                 if ( !dialog.getContentElement( 'info', 'linkType' ) || dialog.getValueOf( 'info', 'linkType' ) != 'tpl' )
                                     return true;
 
-                                var func = CKEDITOR.dialog.validate.notEmpty( 'Zvolte proměnnou' ); // @todo translate
+                                var func = CKEDITOR.dialog.validate.notEmpty( linkLang.chooseTpl );
                                 return func.apply( this );
                             },
                             setup: function( data ) {
@@ -561,7 +583,7 @@
 
 								var dialog = this.getDialog();
 								var editor = dialog.getParentEditor();
-								var avars = editor.config.avars;
+								var avars = editor.config.avars||[];
 
 								avars.forEach(function(el){
                                     if(el.type ==='url') {
@@ -577,31 +599,33 @@
                             },
                             commit: function( data ) {
                             	data.tplCode = this.getValue();
+                            	/*if(data.linkText.trim().length <1){
+                                    data.linkText = '[['+this.getValue()+']]';
+								}*/
+
                             },
 							onChange: function(evt){
-								/*var element = this.getElement();
-								var next = element.getNext();*/
-								//console.log('next',this);
                                 var dialog = this.getDialog();
                                 var editor = dialog.getParentEditor();
-                                var avars = editor.config.avars;
+                                var avars = editor.config.avars||[];
+                                var next = dialog.getContentElement('info','tplLinkDesc');
                                 avars.forEach(function(el){
                                 	if(el.code==evt.data.value){
-                                		console.log('el',el);
-										//next.setValue("AAAAAAAAA "+el.text);
+										next.getElement().setHtml('<h3>'+linkLang.tplDesc+'</h3><div>'+el.desc+'</div>');
                                 		return true;
 									}
 								});
 							},
                             items : [  ]
+                        },{
+                            type: 'html',
+                            id:'tplLinkDesc',
+                            html: ''
                         }],
                         setup: function() {
                             if ( !this.getDialog().getContentElement( 'info', 'linkType' ) )
                                 this.getElement().hide();
                         }
-                    },{
-                        type: 'html',
-                        html: '<h3>This is some sample HTML content.</h3>'
                     }
                     ]
 			},
@@ -1005,14 +1029,6 @@
 				}
 
 				var data = plugin.parseLinkAttributes( editor, firstLink );
-                //var dataCopy = $.extend({}, data);
-                /*var dataCopy = JSON.parse(JSON.stringify(data));
-				if (data.type == "tpl") {
-						dataCopy.type = "url";
-						//dataCopy.url.protocol = "cmspage://";
-						dataCopy.url.url = data.tpl.code;
-					}
-					console.log("X",data,dataCopy);*/
 
 				var matches = null;
                 if (data.type == "url" && (matches = data.url.url.match(/^\[\[([^\[\]])+\]\]/))) {
@@ -1020,7 +1036,6 @@
                     data.tplCodeBracket =  matches[0];
                     data.tplCode =  matches[0].slice(2, -2);
                     data.url = {/*protocol : "http://",*/ url : matches[0]};
-                    //console.log('onShow, data',data);
                 }
 
 				// Here we'll decide whether or not we want to show Display Text field.
@@ -1048,6 +1063,28 @@
 
 					delete this._.selectedElements;
 				}
+
+                var time = 50;
+                if(editor.elementMode===1){
+                    // not inline
+                    if(editor.window.$.frameElement){
+                    	// having iframe
+                        var iframe = editor.window.$.frameElement;
+                        var d = iframe.contentDocument.documentElement;
+                        var top = d.scrollTop;
+                        editor.setData(editor.getData());
+                        setTimeout(function(){
+                            var d = iframe.contentDocument.documentElement;
+                            d.scrollTop = top;
+                        },time);
+                    }else{
+                        editor.setData(editor.getData());
+					}
+                }else{
+                    // inline
+                    editor.setData(editor.getData());
+                }
+
 			},
 			onLoad: function() {
 				if ( !editor.config.linkShowAdvancedTab )

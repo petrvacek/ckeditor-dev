@@ -63,5 +63,9 @@ CKEDITOR.plugins.setLang( 'link', 'cs', {
 	toolbar: 'Odkaz',
 	type: 'Typ odkazu',
 	unlink: 'Odstranit odkaz',
-	upload: 'Odeslat'
+	upload: 'Odeslat',
+    toTpl: 'X_Odkaz z proměnné',
+    chooseTpl: 'X_Vyberte proměnnou',
+    tplDesc: 'X_popis proměnné',
+    tplLabel: 'X_odkaz z proměnné'
 } );

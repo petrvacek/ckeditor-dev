@@ -713,6 +713,7 @@ a.cke_dialog_ui_button_ok.cke_disabled span
 div.cke_dialog_ui_input_select
 {
 	display: table;
+	width:100%;
 }
 
 select.cke_dialog_ui_input_select

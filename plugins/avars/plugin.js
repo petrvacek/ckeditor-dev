@@ -72,7 +72,7 @@
                     var text = code;
                     var valid = false;
                     if (data) {
-                        var text = data.text;
+                        text = data.text;
                         valid = true;
                     }
                     if (valid) {
@@ -81,7 +81,6 @@
                         this.element.$.classList.add('invalid');
                     }
                     this.element.setText('[[' + text + ']]');
-                    //console.log('Xdata',this.element,this.data.name );
                 },
 
                 getLabel : function () {
@@ -142,41 +141,6 @@
                     resolve(msg);
                 });
             };
-            editor.on('change', function (evt) {
-                /*me.changeTimer ;
-                setTimeout(function() {
-
-                    var data = evt.editor.getData();
-                    var valid = true;
-                    var msg = {missing : [], invalid : [], used : []};
-                    // find missing and required;
-                    editor.config.avars.forEach(function (avar) {
-                        if (avar.required === true) {
-                            //try to find any
-                            if (data.indexOf(avar.code) < 0) {
-                                valid = false;
-                                msg.missing.push(avar);
-                            }
-                        }
-                    });
-                    // try to find all possible
-                    var avarsReplaceRegex = /\[\[([^\[\]])+\]\]/g;
-                    var match = null;
-                    while ((match = avarsReplaceRegex.exec(data)) != null) {
-                        var code = match[0].slice(2, -2);
-                        var avar = me.codeToData(code, editor);
-                        if (avar) {
-                            msg.used.push([avar, match.index]);
-                        } else {
-                            msg.invalid.push([code, match.index]);
-                        }
-                    }
-                }
-
-                console.log('msg',msg);*/
-
-
-            });
         },
 
         afterInit : function (editor) {

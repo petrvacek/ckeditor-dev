@@ -756,6 +756,7 @@ Styles for other dialog element types.
 div.cke_dialog_ui_input_select
 {
 	display: table;
+	width:100%;
 }
 
 select.cke_dialog_ui_input_select

@@ -8,5 +8,7 @@ CKEDITOR.plugins.setLang( 'avars', 'cs', {
 	toolbar: 'X_Vytvořit vyhrazený prostor',
 	name: 'X_Název vyhrazeného prostoru',
 	invalidName: 'X_Vyhrazený prostor nesmí být prázdný či obsahovat následující znaky: [, ], <, >',
-	pathName: 'X_Vyhrazený prostor'
+	pathName: 'X_Vyhrazený prostor',
+    descriptionLabel: 'X_Popis proměnné',
+    setValidTpl: 'X_Vyberte proměnnou'
 } );
