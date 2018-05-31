@@ -202,7 +202,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 		</td>
 		<td style="text-align:right">
 			<b>
-				<a href="mailto:%7Bemail%7D" style="color:#ed9136;text-decoration:underline" target="_blank">
+				<a href="{mailto:email}" style="color:#ed9136;text-decoration:underline" target="_blank">
 					{email}
 				</a>
 			</b>
@@ -317,10 +317,15 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 
 
     var A = [
+		{code: 'projekt',text:"Projekt",desc:'Jméno projektu'},
+		{code: 'jmeno',text:"Jméno",desc:'Jméno dárce'},
+		{code: 'prijmeni',text:"Příjmení",desc:'Příjmení dárce'},
+		{code: 'email',text:"E-mail",desc:'E-mail dárce'},
+        {code: 'mailto:email',text:"E-mail s mailto",type:'url',desc:'E-mail dárce',label:'{email}'},
         {code : 'test AA', text : 'test aAaA', desc : 'd 1'},
         {code : 'test BB', text : 'test bBbB', required : true, desc : 'd 2'},
         {code : 'test CC', text : 'test cCcC', type : 'url', label : 'CCC', desc : 'd 3'},
-        {code : 'test DD', text : 'test dDdD', type : 'url', required : true, label : '[[test AA]]', desc : 'd 4'}
+        {code : 'test DD', text : 'test dDdD', type : 'url', required : true, label : '{test AA}', desc : 'd 4'}
     ];
 
     var dom = document.getElementById('avarsList');
@@ -399,7 +404,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 
             if (target.data('avar-url') === 'yes') {
                 //dataTransfer.setData('avar', target.data('avar'));
-                var html = '<a href="[[' + target.data('avar') + ']]">' + target.data('avar-label') + '</a>';
+                var html = '<a href="{' + target.data('avar') + '}">' + target.data('avar-label') + '</a>';
                 console.log('html', html);
                 dataTransfer.setData('text/html', html);
             } else {

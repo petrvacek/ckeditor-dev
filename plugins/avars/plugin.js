@@ -53,10 +53,10 @@
                 pathName : lang.pathName,
                 // We need to have wrapping element, otherwise there are issues in
                 // add dialog.
-                template : '<span class="cke_avars">[[]]</span>',
+                template : '<span class="cke_avars">{}</span>',
 
                 downcast : function () {
-                    return new CKEDITOR.htmlParser.text('[[' + this.data.name + ']]');
+                    return new CKEDITOR.htmlParser.text('{' + this.data.name + '}');
                 },
 
                 init : function () {
@@ -80,7 +80,7 @@
                     } else {
                         this.element.$.classList.add('invalid');
                     }
-                    this.element.setText('[[' + text + ']]');
+                    this.element.setText('{' + text + '}');
                 },
 
                 getLabel : function () {
@@ -104,10 +104,10 @@
                 var code = avar.code || avar;
                 var data = me.codeToData(code, editor);
                 if (data) {
-                    evt.data.dataValue = '[[' + data.code + ']]';
+                    evt.data.dataValue = '{' + data.code + '}';
                 } else {
                     // return false to stop include, code to create invalid placeholder
-                    evt.data.dataValue = '[[' + code + ']]';
+                    evt.data.dataValue = '{' + code + '}';
                 }
             });
 
@@ -127,10 +127,10 @@
                         }
                     });
                     // try to find all possible
-                    var avarsReplaceRegex = /\[\[([^\[\]])+\]\]/g;
+                    var avarsReplaceRegex = /{([^{}])+}/g;
                     var match = null;
                     while ((match = avarsReplaceRegex.exec(data)) != null) {
-                        var code = match[0].slice(2, -2);
+                        var code = match[0].slice(1, -1).trim();
                         var avar = me.codeToData(code, editor);
                         if (avar) {
                             msg.used.push([avar, match.index]);
@@ -145,7 +145,7 @@
 
         afterInit : function (editor) {
             var me = this;
-            var avarsReplaceRegex = /\[\[([^\[\]])+\]\]/g;
+            var avarsReplaceRegex = /{([^{}])+}/g;
             editor.dataProcessor.dataFilter.addRules({
                 text : function (text, node) {
                     var dtd = node.parent && CKEDITOR.dtd[node.parent.name];
@@ -157,7 +157,7 @@
 
                     return text.replace(avarsReplaceRegex, function (match) {
                         // Creating widget code.
-                        var code = match.slice(2, -2);
+                        var code = match.slice(1, -1).trim();
                         var data = me.codeToData(code, editor);
                         if (data) {
                             var text = data.text;
@@ -174,7 +174,7 @@
                             });
 
                         // Adds placeholder identifier as innertext.
-                        innerElement.add(new CKEDITOR.htmlParser.text('[[' + text + ']]'));
+                        innerElement.add(new CKEDITOR.htmlParser.text('{' + text + '}'));
                         widgetWrapper = editor.widgets.wrapElement(innerElement, 'avars');
 
                         // Return outerhtml of widget wrapper so it will be placed

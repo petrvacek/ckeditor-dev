@@ -605,7 +605,7 @@
 			// Compose the URL.
 			switch ( data.type ) {
 				case 'tpl':
-                    set[ 'data-cke-saved-href' ] = '[['+data.tplCode+']]';
+                    set[ 'data-cke-saved-href' ] = '{'+data.tplCode+'}';
                     break;
 				case 'url':
 					var protocol = ( data.url && data.url.protocol !== undefined ) ? data.url.protocol : 'http://',

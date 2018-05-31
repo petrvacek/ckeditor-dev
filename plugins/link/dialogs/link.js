@@ -40,17 +40,26 @@
 
 				// Use link URL as text with a collapsed cursor.
 				if ( range.collapsed ) {
+                    // Short mailto link text view (https://dev.ckeditor.com/ticket/5736).
+                    text = new CKEDITOR.dom.text( data.linkText || ( data.type == 'email' ?
+                        data.email.address : attributes.set[ 'data-cke-saved-href' ] ), editor.document );
+                    range.insertNode( text );
+                    range.selectNodeContents( text );
+
+
+					//!! @todo make it nicer
+
 					// Short mailto link text view (https://dev.ckeditor.com/ticket/5736).
 					/*text = new CKEDITOR.dom.text( data.linkText || ( data.type == 'email' ?
 						data.email.address : attributes.set[ 'data-cke-saved-href' ] ), editor.document );
 */
-					var x = data.linkText || ( data.type == 'email' ?
-						data.email.address : attributes.set[ 'data-cke-saved-href' ] );
+                    /*var x = data.linkText || ( data.type == 'email' ?
+                        data.email.address : attributes.set[ 'data-cke-saved-href' ] );
                     text = new CKEDITOR.dom.element( 'span' );
-                    /*text.setHtml('<span class="cke_avars">'+x+'</span>');*/
+                    //text.setHtml('<span class="cke_avars">'+x+'</span>');
 
                     var valid = true;
-                    var code = x.slice(2,-2);
+                    var code = x.slice(1,-1).trim();
                     var innerElement = new CKEDITOR.htmlParser.element('span', {
                             'class'     : 'cke_avars ' + (!valid ? ' invalid' : ''),
                             'data-avar' : code
@@ -64,8 +73,8 @@
                     text.setHtml(w.getHtml());
 
                     //text = '<span class="cke_avars">'+text+'</span>';
-					range.insertNode( text );
-					range.selectNodeContents( text );
+                    range.insertNode( text );
+                    range.selectNodeContents( text );*/
 				} else if ( initialLinkText !== data.linkText ) {
 					text = new CKEDITOR.dom.text( data.linkText, editor.document );
 
@@ -1031,10 +1040,10 @@
 				var data = plugin.parseLinkAttributes( editor, firstLink );
 
 				var matches = null;
-                if (data.type == "url" && (matches = data.url.url.match(/^\[\[([^\[\]])+\]\]/))) {
+                if (data.type == "url" && (matches = data.url.url.match(/^{([^{}])+}/))) {
                     data.type = "tpl";
                     data.tplCodeBracket =  matches[0];
-                    data.tplCode =  matches[0].slice(2, -2);
+                    data.tplCode =  matches[0].slice(1, -1).trim();
                     data.url = {/*protocol : "http://",*/ url : matches[0]};
                 }
 
