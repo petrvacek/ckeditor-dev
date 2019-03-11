@@ -1,5 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -10,7 +10,7 @@
 
 	CKEDITOR.plugins.add( 'autoembed', {
 		requires: 'autolink,undo',
-		lang: 'az,ca,cs,da,de,de-ch,el,en,en-au,eo,es,es-mx,eu,fr,gl,hr,hu,it,ja,km,ko,ku,mk,nb,nl,oc,pl,pt,pt-br,ro,ru,sk,sq,sv,tr,ug,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
+		lang: 'az,bg,ca,cs,da,de,de-ch,el,en,en-au,eo,es,es-mx,eu,fr,gl,hr,hu,it,ja,km,ko,ku,lv,mk,nb,nl,oc,pl,pt,pt-br,ro,ru,sk,sq,sv,tr,ug,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
 		init: function( editor ) {
 			var currentId = 1,
 				embedCandidatePasted;
@@ -209,7 +209,7 @@
 	 * For example, there is the `embedsemantic` plugin and the `embedSemantic` widget.
 	 *
 	 * Read more in the [documentation](#!/guide/dev_media_embed-section-automatic-embedding-on-paste)
-	 * and see the [SDK sample](https://sdk.ckeditor.com/samples/mediaembed.html).
+	 * and see the {@glink examples/mediaembed example}.
 	 *
 	 * @since 4.5
 	 * @cfg {String/Function} [autoEmbed_widget='embed,embedSemantic']

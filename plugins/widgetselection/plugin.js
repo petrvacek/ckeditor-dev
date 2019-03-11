@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -22,10 +22,9 @@
 				editor.on( 'contentDom', function( evt ) {
 
 					var editor = evt.editor,
-						doc = editor.document,
 						editable = editor.editable();
 
-					editable.attachListener( doc, 'keydown', function( evt ) {
+					editable.attachListener( editable, 'keydown', function( evt ) {
 						// Ctrl/Cmd + A
 						if ( evt.data.getKeystroke() == CKEDITOR.CTRL + 65 ) {
 							// Defer the call so the selection is already changed by the pressed keys.

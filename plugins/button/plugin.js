@@ -1,5 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -27,10 +27,16 @@
 	if ( CKEDITOR.env.gecko )
 		template += ' onblur="this.style.cssText = this.style.cssText;"';
 
+	// IE and Edge needs special click handler based on mouseup event with additional check
+	// of which mouse button was clicked (https://dev.ckeditor.com/ticket/188, #2565).
+	var specialClickHandler = '';
+	if ( CKEDITOR.env.ie ) {
+		specialClickHandler = 'return false;" onmouseup="CKEDITOR.tools.getMouseButton(event)==CKEDITOR.MOUSE_BUTTON_LEFT&&';
+	}
+
 	template += ' onkeydown="return CKEDITOR.tools.callFunction({keydownFn},event);"' +
 		' onfocus="return CKEDITOR.tools.callFunction({focusFn},event);" ' +
-		( CKEDITOR.env.ie ? 'onclick="return false;" onmouseup' : 'onclick' ) + // https://dev.ckeditor.com/ticket/188
-			'="CKEDITOR.tools.callFunction({clickFn},this);return false;">' +
+		'onclick="' + specialClickHandler + 'CKEDITOR.tools.callFunction({clickFn},this);return false;">' +
 		'<span class="cke_button_icon cke_button__{iconName}_icon" style="{style}"';
 
 
@@ -49,9 +55,6 @@
 		btnTpl = CKEDITOR.addTemplate( 'button', template );
 
 	CKEDITOR.plugins.add( 'button', {
-		// jscs:disable maximumLineLength
-		lang: 'af,ar,az,bg,ca,cs,da,de,de-ch,el,en,en-au,en-gb,eo,es,es-mx,eu,fa,fi,fr,gl,he,hr,hu,id,it,ja,km,ko,ku,lt,nb,nl,no,oc,pl,pt,pt-br,ro,ru,sk,sl,sq,sv,tr,tt,ug,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
-		// jscs:enable maximumLineLength
 		beforeInit: function( editor ) {
 			editor.ui.addHandler( CKEDITOR.UI_BUTTON, CKEDITOR.ui.button.handler );
 		}
@@ -292,13 +295,14 @@
 				name: name,
 				iconName: iconName,
 				label: this.label,
-				cls: this.className || '',
+				// .cke_button_expandable enables additional styling for popup buttons (#2483).
+				cls:  ( this.hasArrow ? 'cke_button_expandable ' : '' ) + ( this.className || '' ),
 				state: stateName,
 				ariaDisabled: stateName == 'disabled' ? 'true' : 'false',
 				title: this.title + ( shortcut ? ' (' + shortcut.display + ')' : '' ),
 				ariaShortcut: shortcut ? editor.lang.common.keyboardShortcut + ' ' + shortcut.aria : '',
 				titleJs: env.gecko && !env.hc ? '' : ( this.title || '' ).replace( "'", '' ),
-				hasArrow: this.hasArrow ? 'true' : 'false',
+				hasArrow: typeof this.hasArrow === 'string' && this.hasArrow || ( this.hasArrow ? 'true' : 'false' ),
 				keydownFn: keydownFn,
 				focusFn: focusFn,
 				clickFn: clickFn,
@@ -330,20 +334,18 @@
 
 			if ( element ) {
 				element.setState( state, 'cke_button' );
-
-				state == CKEDITOR.TRISTATE_DISABLED ?
-					element.setAttribute( 'aria-disabled', true ) :
-					element.removeAttribute( 'aria-disabled' );
+				element.setAttribute( 'aria-disabled', state == CKEDITOR.TRISTATE_DISABLED );
 
 				if ( !this.hasArrow ) {
 					// Note: aria-pressed attribute should not be added to menuButton instances. (https://dev.ckeditor.com/ticket/11331)
-					state == CKEDITOR.TRISTATE_ON ?
-						element.setAttribute( 'aria-pressed', true ) :
+					if ( state === CKEDITOR.TRISTATE_ON ) {
+						element.setAttribute( 'aria-pressed', true );
+					} else {
 						element.removeAttribute( 'aria-pressed' );
+					}
 				} else {
-					var newLabel = state == CKEDITOR.TRISTATE_ON ?
-						this._.editor.lang.button.selectedLabel.replace( /%1/g, this.label ) : this.label;
-					CKEDITOR.document.getById( this._.id + '_label' ).setText( newLabel );
+					// Indicates that menu button is opened (#421).
+					element.setAttribute( 'aria-expanded', state == CKEDITOR.TRISTATE_ON );
 				}
 
 				return true;
@@ -432,6 +434,8 @@
 	 * 		editor.ui.addButton( 'my_button', {
 	 * 			iconHiDpi: 'assets/icons/my_button.hidpi.png'
 	 * 		} )
+	 * @param {String/Boolean} definition.hasArrow If Boolean, it indicates whether the button should have a dropdown. If a string, it acts
+	 * as a value of the button's `aria-haspopup` attribute. Since **4.11.0** it supports the string as a value.
 	 */
 	CKEDITOR.ui.prototype.addButton = function( name, definition ) {
 		this.add( name, CKEDITOR.UI_BUTTON, definition );

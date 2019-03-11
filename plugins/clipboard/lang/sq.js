@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'clipboard', 'sq', {
@@ -10,6 +10,5 @@ CKEDITOR.plugins.setLang( 'clipboard', 'sq', {
 	paste: 'Hidhe',
 	pasteNotification: 'Shtyp %1 për të hedhur tekstin. Shfletuesi juaj nuk mbështetë hedhjen me pullë shiriti ose alternativën e menysë kontekstuale.',
 	pasteArea: 'Hapësira e Hedhjes',
-	pasteMsg: 'Hidh përmbajtjen brenda hapësirës më poshtë dhe shtyp OK.',
-	title: 'Hidhe'
+	pasteMsg: 'Hidh përmbajtjen brenda hapësirës më poshtë dhe shtyp MIRË.'
 } );

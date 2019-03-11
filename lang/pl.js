@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -84,7 +84,7 @@ CKEDITOR.lang[ 'pl' ] = {
 		justify: 'Wyjustuj',
 		alignLeft: 'Wyrównaj do lewej',
 		alignRight: 'Wyrównaj do prawej',
-		alignCenter: 'Align Center', // MISSING
+		alignCenter: 'Wyśrodkuj',
 		alignTop: 'Do góry',
 		alignMiddle: 'Do środka',
 		alignBottom: 'Do dołu',

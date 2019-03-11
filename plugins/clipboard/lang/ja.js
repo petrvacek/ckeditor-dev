@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'clipboard', 'ja', {
@@ -10,6 +10,5 @@ CKEDITOR.plugins.setLang( 'clipboard', 'ja', {
 	paste: '貼り付け',
 	pasteNotification: 'Press %1 to paste. Your browser doesn‘t support pasting with the toolbar button or context menu option.', // MISSING
 	pasteArea: '貼り付け場所',
-	pasteMsg: 'Paste your content inside the area below and press OK.', // MISSING
-	title: '貼り付け'
+	pasteMsg: 'Paste your content inside the area below and press OK.' // MISSING
 } );

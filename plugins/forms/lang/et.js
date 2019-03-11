@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'forms', 'et', {
@@ -38,7 +38,7 @@ CKEDITOR.plugins.setLang( 'forms', 'et', {
 		size: 'Suurus',
 		lines: 'ridu',
 		chkMulti: 'Võimalik mitu valikut',
-		required: 'Required', // MISSING
+		required: 'Nõutud',
 		opText: 'Tekst',
 		opValue: 'Väärtus',
 		btnAdd: 'Lisa',

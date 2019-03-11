@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -170,9 +170,16 @@
 	};
 
 	/**
-	 * Hides the toolbar and removes it from the DOM.
+	 * Hides the toolbar, removes it from the DOM, and clears all its items.
 	 */
 	CKEDITOR.ui.balloonToolbar.prototype.destroy = function() {
+		for ( var key in this._items ) {
+			if ( this._items[ key ].destroy ) {
+				this._items[ key ].destroy();
+			}
+			this.deleteItem( key );
+		}
+
 		this._pointedElement = null;
 		this._view.destroy();
 	};

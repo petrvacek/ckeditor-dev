@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -68,6 +68,9 @@
 			regex.push( org );
 			return '';
 		} );
+
+		// Drop trailing comma (#2448).
+		entities = entities.replace( /,$/, '' );
 
 		if ( !reverse && entities ) {
 			// Transforms the entities string into an array.

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'clipboard', 'cs', {
@@ -10,6 +10,5 @@ CKEDITOR.plugins.setLang( 'clipboard', 'cs', {
 	paste: 'Vložit',
 	pasteNotification: 'Stiskněte %1 pro vložení. Váš prohlížeč nepodporuje vkládání pomocí tlačítka na panelu nástrojů nebo volby kontextového menu.',
 	pasteArea: 'Oblast vkládání',
-	pasteMsg: 'Vložte svůj obsah do oblasti níže a stiskněte OK.',
-	title: 'Vložit'
+	pasteMsg: 'Vložte svůj obsah do oblasti níže a stiskněte OK.'
 } );

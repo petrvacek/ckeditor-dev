@@ -1,5 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -39,7 +39,7 @@
 			defaultValue: 'cke-default',
 			allowedContent: style,
 			requiredContent: style,
-			contentTransformations: [
+			contentTransformations: styleDefinition.element === 'span' ? [
 				[
 					{
 						element: 'font',
@@ -80,7 +80,7 @@
 						}
 					}
 				]
-			],
+			] : null,
 			panel: {
 				css: [ CKEDITOR.skin.getPath( 'editor' ) ].concat( config.contentsCss ),
 				multiSelect: false,

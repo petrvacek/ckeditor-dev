@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -60,6 +60,19 @@
 
 	bender.tools = {
 		/**
+		 * Creates an array from an object.
+		 *
+		 * @param  {Object} obj
+		 * @return {Array} object values.
+		 */
+		objToArray: function( obj ) {
+			var tools = CKEDITOR.tools;
+			return tools.array.map( tools.objectKeys( obj ), function( key ) {
+				return obj[ key ];
+			} );
+		},
+
+		/**
 		 * Gets the inner HTML of an element, for testing purposes.
 		 * @param {Boolean} stripLineBreaks Assign 'false' to avoid trimming line-breaks.
 		 */
@@ -79,7 +92,7 @@
 		},
 
 		env: {
-			/*
+			/**
 			 * Tells whether current environment is running on a mobile browser.
 			 *
 			 * It's different from deprecated {@link CKEDITOR.env.mobile} in a way that we are just
@@ -87,15 +100,20 @@
 			 */
 			mobile: CKEDITOR.env.iOS || navigator.userAgent.toLowerCase().indexOf( 'android' ) !== -1,
 
-			/*
+			/**
 			 * Whether current OS is a Linux environment.
 			 */
 			linux: navigator.userAgent.toLowerCase().indexOf( 'linux' ) !== -1,
 
-			/*
+			/**
 			 * Whether current environment is Opera browser.
 			 */
-			opera: navigator.userAgent.toLowerCase().indexOf( ' opr/' ) !== -1
+			opera: navigator.userAgent.toLowerCase().indexOf( ' opr/' ) !== -1,
+
+			/**
+			 * Whether current environment is run as build version of CKEditor.
+			 */
+			isBuild: CKEDITOR.revision !== '%REV%'
 		},
 
 		fixHtml: function( html, stripLineBreaks, toLowerCase ) {
@@ -1067,11 +1085,12 @@
 		/**
 		 * Multiplies inputTests for every editor.
 		 *
-		 * @param {Object} editorsDefinitions editors definitions.
-		 * @param {Object} inputTests Tests to apply on every editor.
-		 * @returns {Object} Created tests for every editor.
+		 * @param {String[]} editorsNames Editors definitions.
+		 * @param {Object.<String, Function>} inputTests Tests to apply on every editor.
+		 * @param {Boolean} [isolateTests=false] If set to `true` each test is run on new editor instance.
+		 * @returns {Object.<String, Function>} Created tests for every editor.
 		 */
-		createTestsForEditors: function( editorsNames, inputTests ) {
+		createTestsForEditors: function( editorsNames, inputTests, isolateTests ) {
 			var outputTests = {},
 				specificTestName,
 				specialMethods = {
@@ -1080,7 +1099,7 @@
 					'setUp': 1,
 					'tearDown': 1
 				},
-				i, editorName;
+				i, editorName, editorCounter;
 
 			for ( var method in specialMethods ) {
 				if ( inputTests[ method ] ) {
@@ -1088,7 +1107,7 @@
 				}
 			}
 
-			for ( i = 0; i < editorsNames.length; i++ ) {
+			for ( i = 0, editorCounter = 0; i < editorsNames.length; i++, editorCounter = 0 ) {
 				editorName = editorsNames[ i ];
 
 				for ( var testName in inputTests ) {
@@ -1103,11 +1122,26 @@
 						throw new Error( 'Test named "' + specificTestName + '" already exists' );
 					}
 
-					outputTests[ specificTestName ] = ( function( testName, editorName ) {
-						return function() {
-							inputTests[ testName ]( bender.editors[ editorName ], bender.editorBots [ editorName ] );
-						};
-					} )( testName, editorName );
+					// We are creating new editor instance to isolate each test case (#1696).
+					if ( isolateTests && editorCounter++ ) {
+						outputTests[ specificTestName ] = ( function( testName, editorName, editorNum ) {
+							var options = CKEDITOR.tools.object.merge( bender.editors[ editorName ], {
+								name: editorName + editorNum
+							} );
+
+							return function() {
+								bender.editorBot.create( options, function( bot ) {
+									inputTests[ testName ]( bot.editor, bot );
+								} );
+							};
+						} )( testName, editorName, editorCounter );
+					} else {
+						outputTests[ specificTestName ] = ( function( testName, editorName ) {
+							return function() {
+								inputTests[ testName ]( bender.editors[ editorName ], bender.editorBots [ editorName ] );
+							};
+						} )( testName, editorName );
+					}
 				}
 			}
 
@@ -1142,7 +1176,36 @@
 
 			// Add random string to be sure that the image will be downloaded, not taken from cache.
 			img.setAttribute( 'src', src + '?' + Math.random().toString( 16 ).substring( 2 ) );
+		},
+
+		/*
+		* Fires element event handler attribute e.g.
+		* ```html
+		* <button onkeydown="return customFn( event )">x</button>
+		* ```
+		*
+		* @param {CKEDITOR.dom.element/HTMLElement} element Element with attached event handler attribute.
+		* @param {String} eventName Event handler attribute name.
+		* @param {Object} evt Event payload.
+		*/
+		fireElementEventHandler: function( element, eventName, evt ) {
+			if ( element.$ ) {
+				element = element.$;
+			}
+
+			if ( CKEDITOR.env.ie && CKEDITOR.env.version < 9 ) {
+				var nativeEvent = CKEDITOR.document.$.createEventObject();
+
+				for ( var key in evt ) {
+					nativeEvent[ key ] = evt[ key ];
+				}
+
+				element.fireEvent( eventName, nativeEvent );
+			} else {
+				element[ eventName ]( evt );
+			}
 		}
+
 	};
 
 	bender.tools.range = {

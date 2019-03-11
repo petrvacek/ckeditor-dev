@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'clipboard', 'hr', {
@@ -10,6 +10,5 @@ CKEDITOR.plugins.setLang( 'clipboard', 'hr', {
 	paste: 'Zalijepi',
 	pasteNotification: 'Vaš preglednik Vam ne dozvoljava lijepljenje običnog teksta na ovaj način. Za lijepljenje, pritisnite %1.',
 	pasteArea: 'Okvir za lijepljenje',
-	pasteMsg: 'Zalijepite vaš sadržaj u okvir ispod i pritisnite OK.',
-	title: 'Zalijepi'
+	pasteMsg: 'Zalijepite vaš sadržaj u okvir ispod i pritisnite OK.'
 } );

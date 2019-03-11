@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -179,9 +179,13 @@ CKEDITOR.htmlWriter = CKEDITOR.tools.createClass( {
 		attribute: function( attName, attValue ) {
 
 			if ( typeof attValue == 'string' ) {
-				this.forceSimpleAmpersand && ( attValue = attValue.replace( /&amp;/g, '&' ) );
 				// Browsers don't always escape special character in attribute values. (https://dev.ckeditor.com/ticket/4683, https://dev.ckeditor.com/ticket/4719).
 				attValue = CKEDITOR.tools.htmlEncodeAttr( attValue );
+
+				// Run ampersand replacement after the htmlEncodeAttr, otherwise the results are overwritten (#965).
+				if ( this.forceSimpleAmpersand ) {
+					attValue = attValue.replace( /&amp;/g, '&' );
+				}
 			}
 
 			this._.output.push( ' ', attName, '="', attValue, '"' );

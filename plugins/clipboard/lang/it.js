@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 */
 CKEDITOR.plugins.setLang( 'clipboard', 'it', {
@@ -10,6 +10,5 @@ CKEDITOR.plugins.setLang( 'clipboard', 'it', {
 	paste: 'Incolla',
 	pasteNotification: 'Premere %1 per incollare. Il tuo browser non permette di incollare tramite il pulsante della barra degli strumenti o tramite la voce del menu contestuale.',
 	pasteArea: 'Area dove incollare',
-	pasteMsg: 'Incollare il proprio contenuto all\'interno dell\'area sottostante e premere OK.',
-	title: 'Incolla'
+	pasteMsg: 'Incollare il proprio contenuto all\'interno dell\'area sottostante e premere OK.'
 } );

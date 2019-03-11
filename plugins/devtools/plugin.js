@@ -1,5 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
@@ -19,9 +19,9 @@ CKEDITOR.plugins.add( 'devtools', {
 ( function() {
 	function defaultCallback( editor, dialog, element, tabName ) {
 		var lang = editor.lang.devtools,
-			link = '<a href="https://docs.ckeditor.com/ckeditor4/docs/#!/api/CKEDITOR.dialog.definition.' +
+			link = '<a href="https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dialog_definition_' +
 			( element ? ( element.type == 'text' ? 'textInput' : element.type ) : 'content' ) +
-			'" target="_blank" rel="noopener noreferrer">' + ( element ? element.type : 'content' ) + '</a>',
+			'.html" target="_blank" rel="noopener noreferrer">' + ( element ? element.type : 'content' ) + '</a>',
 			str = '<h2>' + lang.title + '</h2>' +
 			'<ul>' +
 			'<li><strong>' + lang.dialogName + '</strong> : ' + dialog.getName() + '</li>' +
@@ -114,14 +114,14 @@ CKEDITOR.plugins.add( 'devtools', {
  * A function that returns the text to be displayed inside the Developer Tools
  * tooltip when hovering over a dialog UI element.
  *
- * Read more in the [documentation](#!/guide/dev_devtools)
- * and see the [SDK sample](https://sdk.ckeditor.com/samples/devtools.html).
+ * Read more in the {@glink guide/dev_devtools documentation}
+ * and see the {@glink examples/devtools example}.
  *
  *		// This is actually the default value.
  *		// Show dialog window name, tab ID, and element ID.
  *		config.devtools_textCallback = function( editor, dialog, element, tabName ) {
  *			var lang = editor.lang.devtools,
- *				link = '<a href="https://docs.ckeditor.com/ckeditor4/docs/#!/api/CKEDITOR.dialog.definition.' +
+ *				link = '<a href="https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_dialog_definition_' +
  *					( element ? ( element.type == 'text' ? 'textInput' : element.type ) : 'content' ) +
  *					'.html" target="_blank">' + ( element ? element.type : 'content' ) + '</a>',
  *				str =
@@ -150,8 +150,8 @@ CKEDITOR.plugins.add( 'devtools', {
 /**
  * A setting that stores CSS rules to be injected into the page with styles to be applied to the tooltip element.
  *
- * Read more in the [documentation](#!/guide/dev_devtools)
- * and see the [SDK sample](https://sdk.ckeditor.com/samples/devtools.html).
+ * Read more in the {@glink guide/dev_devtools documentation}
+ * and see the {@glink examples/devtools example}.
  *
  *		// This is actually the default value.
  *		CKEDITOR.config.devtools_styles =
