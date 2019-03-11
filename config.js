@@ -9,65 +9,67 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.uiColor = '#AADC6E';
 	// %REMOVE_START%
 	config.plugins =
+		//'avars,'+
 		'about,' +
 		'a11yhelp,' +
 		'basicstyles,' +
 		'bidi,' +
-		'blockquote,' +
+		//'blockquote,' +
 		'clipboard,' +
-		'colorbutton,' +
-		'colordialog,' +
-		'copyformatting,' +
+		//'colorbutton,' +
+		//'colordialog,' +
+		//'copyformatting,' +
 		'contextmenu,' +
-		'dialogadvtab,' +
+		//'dialogadvtab,' +
 		'div,' +
+		'divarea,' +
 		'elementspath,' +
 		'enterkey,' +
 		'entities,' +
-		'filebrowser,' +
-		'find,' +
-		'flash,' +
-		'floatingspace,' +
-		'font,' +
-		'format,' +
-		'forms,' +
-		'horizontalrule,' +
+		//'filebrowser,' +
+		//'find,' +
+		//'flash,' +
+		//'floatingspace,' +
+		//'font,' +
+		//'format,' +
+		//'forms,' +
+		//'horizontalrule,' +
 		'htmlwriter,' +
-		'image,' +
+		//'image,' +
 		'iframe,' +
-		'indentlist,' +
-		'indentblock,' +
-		'justify,' +
-		'language,' +
-		'link,' +
-		'list,' +
-		'liststyle,' +
-		'magicline,' +
-		'maximize,' +
-		'newpage,' +
-		'pagebreak,' +
+		//'indentlist,' +
+		//'indentblock,' +
+		//'justify,' +
+		//'language,' +
+		//'link,' +
+		//'list,' +
+		//'liststyle,' +
+		//'magicline,' +
+		//'maximize,' +
+		//'newpage,' +
+		//'pagebreak,' +
 		'pastefromword,' +
 		'pastetext,' +
-		'preview,' +
-		'print,' +
-		'removeformat,' +
+		//'preview,' +
+		//'print,' +
+		//'removeformat,' +
 		'resize,' +
-		'save,' +
+		//'save,' +
 		'selectall,' +
-		'showblocks,' +
-		'showborders,' +
-		'smiley,' +
-		'sourcearea,' +
-		'specialchar,' +
-		'stylescombo,' +
+		//'showblocks,' +
+		//'showborders,' +
+		//'smiley,' +
+		//'sourcearea,' +
+		//'specialchar,' +
+		//'stylescombo,' +
 		'tab,' +
-		'table,' +
-		'tableselection,' +
-		'tabletools,' +
-		'templates,' +
+		//'table,' +
+		//'tableselection,' +
+		//'tabletools,' +
+		//'templates,' +
 		'toolbar,' +
 		'undo,' +
-		'uploadimage,' +
+		//'uploadimage,' +
 		'wysiwygarea';
 	// %REMOVE_END%
 };
