@@ -51,7 +51,7 @@ CKEDITOR.dialog.add( 'avars', function( editor ) {
                                 var editor = dialog.getParentEditor();
                                 var avars = editor.config.avars||[];
 
-                                avars.forEach(function(el){
+                                avars.filter(function(item){return item.type=='normal';}).forEach(function(el){
                                     //if(el.type ==='url') {
                                         select.add(el.text, el.code);
                                     //}

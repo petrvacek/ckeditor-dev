@@ -36,7 +36,16 @@
 
         onLoad : function () {
             // Register styles for placeholder widget frame.
-            CKEDITOR.addCss('.cke_avars{background-color:#ff0}.cke_avars.invalid{background-color:#ff0000}');
+            CKEDITOR.addCss('.cke_avars{ \
+            background-color: rgba(76, 175, 80 , 0.12); \
+            border: 2px dashed rgb(76, 175, 80); \
+            padding: 1px; \
+            text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.45);}' +
+              '.cke_avars.invalid{\
+            background-color: rgba(255, 0, 0, 0.12); \
+            border-color: rgb(255, 0, 0);}');
+
+
         },
 
         init : function (editor) {
@@ -133,9 +142,9 @@
                         var code = match[0].slice(1, -1).trim();
                         var avar = me.codeToData(code, editor);
                         if (avar) {
-                            msg.used.push([avar, match.index]);
+                            msg.used.push({avar: avar, position: match.index});
                         } else {
-                            msg.invalid.push([code, match.index]);
+                            msg.invalid.push({code: code, position: match.index});
                         }
                     }
                     resolve(msg);
@@ -170,7 +179,8 @@
                         var widgetWrapper = null,
                             innerElement = new CKEDITOR.htmlParser.element('span', {
                                 'class'     : 'cke_avars ' + (!valid ? ' invalid' : ''),
-                                'data-avar' : code
+                                'data-avar' : code,
+                                'title': data.desc||''
                             });
 
                         // Adds placeholder identifier as innertext.
