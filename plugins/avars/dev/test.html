@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<!--
+Copyright (c) 2003-2018, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Placeholder Plugin &mdash; CKEditor Sample</title>
+    <script src="https://cdn.jsdelivr.net/gh/petrvacek/ckeditor-dev@stable/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/petrvacek/ckeditor-dev@stable/dev/console/console.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/petrvacek/ckeditor-dev@stable/dev/console/focusconsole.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/petrvacek/ckeditor-dev@stable/plugins/widget/dev/console.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/petrvacek/ckeditor-dev@stable/samples/old/sample.css">
+
+</head>
+<body>
+<h1 class="samples">Avars Plugin</h1>
+
+<h2>Classic (iframe-based) Sample</h2>
+<textarea cols="80" id="editor1" name="editor1" rows="10">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type"
+                                                                                 content="text/html; charset=utf-8"></head><body>
+
+
+
+
+	<div marginwidth="0" marginheight="0"
+         style="margin:0px;padding:0px;background-color:#f5f5f5;font-family:Helvetica,Verdana,Arial,sans-serif;color:#434343;font-size:16px;line-height:23px">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#F5F5F5"
+               style="background-color:#f5f5f5">
+			<tr>
+				<td align="center">
+					<table width="600" border="0" cellpadding="0" cellspacing="0" bgcolor="#F5F5F5;"
+                           style="background-color:#f5f5f5;padding:15px;margin:0 auto 0 auto;width:600px">
+
+
+
+
+<tr>
+	<td style="padding:35px 0 0 0"></td>
+</tr>
+<tr>
+	<td style="background-color:#ffffff;border:none;margin:0;overflow:hidden;border-radius:3px;padding:25px 25px 5px 25px">
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:15px 0 0 0;text-align:center">
+	<tr>
+		<td style="padding-bottom:40px">
+			<img src="http://xxxx.cz/assets/images/email-header.png" width="139" height="133" alt="">
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:25px;color:#ed9136;font-weight:bold;line-height:30px;padding-bottom:10px">
+						<span style="margin:0;color:#ed9136;text-decoration:none">
+					{projekt} {projekt}
+			</span>
+
+		</td>
+	</tr>
+	<tr>
+		<td style="font-size:12px;font-weight:700;letter-spacing:1.54px;line-height:14px">
+
+			<span style="text-transform:uppercase">
+				Organizace:
+			</span>
+
+			<span style="margin:0;color:#ed9136;text-decoration:underline">
+					{klient}
+			</span>
+			<p style="font-size:25px;font-weight:bold;line-height:30px">
+				<span style="margin:0;text-decoration:none">
+					Děkujeme. Zbývá už jen jeden krok...
+				</span>
+			</p>
+
+		</td>
+	</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;border:none">
+	<tr><td style="padding-bottom:40px"></td></tr>
+</table>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;text-align:center">
+	<tr>
+		<td style="position:relative">
+			<span style="display:block;position:absolute;top:50%;left:-25px;right:-25px;height:2px;background-color:#eeeeee;font-size:1px;line-height:2px"> </span>
+			<div style="position:relative;text-transform:uppercase;font-size:12px;font-weight:700;padding:1px 0 1px 0">
+					<span style="background-color:#ffffff;padding:0 10px 0 10px">
+									Id daru: {xxxx_vs}
+					</span>
+			</div>
+		</td>
+	</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;border:none">
+	<tr><td style="padding-bottom:20px"></td></tr>
+</table>
+
+
+<p style="margin:0;line-height:23px">
+				Prosíme o zaslání daru převodem dle instrukcí níže.
+
+</p>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;border:none">
+	<tr><td style="padding-bottom:20px"></td></tr>
+</table>
+
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="15" bgcolor="#FFFFFF"
+       style="background-color:#ffffff;border:1px solid #dcdcdc">
+		<tr>
+		<td>
+			Způsob zaslání daru:
+		</td>
+		<td style="text-align:right">
+			<b>Běžným převodem</b>
+		</td>
+	</tr>
+		<tr>
+			<td>
+				Bankovní účet:
+			</td>
+			<td style="text-align:right">
+				<b>XXXX/XXXX</b>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Variabilní symbol:
+			</td>
+			<td style="text-align:right">
+				<b>{XXXXX_vs}</b>
+			</td>
+		</tr>
+	<tr>
+		<td>
+			Četnost příkazu platby:
+		</td>
+		<td style="text-align:right">
+			<b>{cetnost}</b>
+		</td>
+	</tr>
+  <tr>
+		<td>
+			Konec opakované platby:
+		</td>
+		<td style="text-align:right">
+			<b>{datum_konce_opakovane_platby_pomlcka}</b>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Výše daru:
+		</td>
+		<td style="text-align:right">
+			<b>{castka_s_menou}</b>
+		</td>
+	</tr>
+
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;border:none">
+	<tr><td style="padding-bottom:20px"></td></tr>
+</table>
+
+
+
+
+<p style="margin:0;line-height:23px">
+		Informace o dárci:
+
+</p>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;border:none">
+	<tr><td style="padding-bottom:20px"></td></tr>
+</table>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="15" bgcolor="#FFFFFF"
+       style="background-color:#ffffff;border:1px solid #dcdcdc">
+		<tr>
+		<td>
+			Jméno:
+		</td>
+		<td style="text-align:right">
+			<b>{jmeno}</b>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Příjmení:
+		</td>
+		<td style="text-align:right">
+			<b>{prijmeni}</b>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			E-mail:
+		</td>
+		<td style="text-align:right">
+			<b>
+				<a href="{mailto:email}" style="color:#ed9136;text-decoration:underline" target="_blank">
+					{email}
+				</a>
+			</b>
+		</td>
+	</tr>
+
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;border:none">
+	<tr><td style="padding-bottom:20px"></td></tr>
+</table>
+
+
+<p style="margin:0;line-height:23px">
+				<span style="margin:0;text-decoration:none;font-size:12px">
+				Dar převodem je zajištěn skrze auditovaný zprostředkovatelský účet XXXXX.....
+			</span>
+
+</p>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;border:none">
+	<tr><td style="padding-bottom:20px"></td></tr>
+</table>
+
+
+	</td>
+</tr>
+
+<tr>
+	<td style="padding:35px 0 0 0"></td>
+</tr>
+<tr>
+	<td style="background-color:#ffffff;border:none;margin:0;overflow:hidden;border-radius:3px;padding:25px 25px 5px 25px">
+
+
+<h4 style="margin:0 0 10px 0;text-transform:uppercase;font-size:12px">
+	Kontakt na neziskovou organizaci
+</h4>
+
+
+<p style="margin:0;line-height:23px">
+			V případě dotazu na Vámi podpořenou neziskovou organizaci (potvrzení o daru, informace o využití daru, …) kontaktujte na e-mailové adrese: <a
+        href="mailto:%7Bnno_email%7D" style="color:#ed9136;text-decoration:underline" target="_blank">{nno_email}</a>	přímo kolegy z dané organizace.
+
+
+</p>
+
+<h4 style="margin:10px 0 10px 0;text-transform:uppercase;font-size:12px">
+	Kontakt na XXXXX.cz
+</h4>
+
+
+<p style="margin:0;line-height:23px">
+			V případě vašich dotazů a připomínek ke službě XXXXX.cz nás neváhejte kontaktovat e-mailem na
+		<a href="mailto:info@XXXXX.cz" style="color:#ed9136;text-decoration:underline"
+           target="_blank">info@XXXXX.cz</a>.
+
+</p>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin:0;border:none">
+	<tr><td style="padding-bottom:20px"></td></tr>
+</table>
+
+
+	</td>
+</tr>
+
+<tr>
+	<td style="text-align:center;padding:35px 0 35px 0">
+		<a href="http://XXXXX.loc/organizace" target="_blank">
+			<img src="http://XXXXX.cz/assets/images/email-footer.png" width="199" height="41" alt="XXXXX logo">
+		</a>
+	</td>
+</tr>
+
+					</table>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+</body></html>
+	</textarea>
+<pre id="dump1"></pre>
+
+<hr/>
+
+<h2>Inline Sample</h2>
+<div id="editor2" contenteditable="true" cols="10" rows="10">
+    <p>This is a [[test AA]]. You are using <a href="https://ckeditor.com/">CKEditor</a>. </p>
+</div>
+<pre id="dump2"></pre>
+
+<hr/>
+
+<h2>Div Editing Area Sample</h2>
+<textarea cols="80" id="editor3" name="editor3" rows="10">
+		&lt;p&gt;
+	Děkujeme, že jste podpořili náš projekt '{projekt}' a proto vám děkujeme. <br/>
+	{jmeno} {prijmeni} jste nejlepší !
+	&lt;/p&gt;
+	</textarea>
+<pre id="dump3"></pre>
+
+<p> Seznam proměnných (jdou přetáhnout do obsahu myší -> drag&drop)</p>
+<ul id="avarsList">
+
+</ul>
+
+<script>
+
+
+  var A = [
+    {id: 1, code: 'projekt', text: "Projekt", desc: 'Jméno projektu', type: 'normal', required: true},
+    {id: 2, code: 'jmeno', text: "Jméno", desc: 'Jméno dárce', type: 'normal'},
+    {id: 3, code: 'prijmeni', text: "Příjmení", desc: 'Příjmení dárce', type: 'normal'},
+    {id: 4, code: 'email', text: "E-mail", desc: 'E-mail dárce', type: 'normal'},
+
+    {
+      id: 5,
+      code: 'mailto:email',
+      text: "E-mail na dárce, klikatelný",
+      type: 'url',
+      desc: 'E-mail dárce',
+      label: '{email}'
+    }
+
+    /*    ,
+
+        {id: 6, code: 'test AA', text: 'test aAaA', desc: 'd 1'},
+        {id: 7, code: 'test BB', text: 'test bBbB', required: true, desc: 'd 2'},
+        {id: 8, code: 'test CC', text: 'test cCcC', type: 'url', label: 'CCC', desc: 'd 3'},
+        {id: 9, code: 'test DD', text: 'test dDdD', type: 'url', required: true, label: '{test AA}', desc: 'd 4'}*/
+
+  ];
+
+
+  var dom = document.getElementById('avarsList');
+  A.forEach(function (el) {
+    var child = document.createElement('li');
+    var div = document.createElement('div');
+    div.dataset['avar'] = el.code;
+    div.dataset['avarFull'] = el;
+    div.dataset['avarUrl'] = (el.type === 'url' ? 'yes' : 'no');
+    div.dataset['avarLabel'] = (el.type === 'url' ? el.label : el.text);
+
+    div.setAttribute('draggable', true);
+    div.classList.add('avars');
+    div.innerText = 'X ' + el.text;
+    child.appendChild(div);
+    dom.appendChild(child);
+  });
+
+  var wees = CKEDITOR.replace('editor1', {
+    extraPlugins: 'avars,link,sourcearea,autogrow,autocomplete,textmatch',
+    height: 100,
+    avars: A,
+
+    //extraPlugins: 'font,panelbutton,colorbutton,colordialog,justify,indentblock,aparat,buyLink',
+    // You may want to disable content filtering because if you use full page mode, you probably
+    // want to  freely enter any HTML content in source mode without any limitations.
+
+    fullPage: true,
+    allowedContent: true,
+    on: {
+      instanceReady: function (evt) {
+        var itemTemplate = '<li data-id="{id}">' +
+          '<div><strong class="item-title">{text}</strong></div>' +
+          '<div><i>{desc}</i></div>' +
+          '</li>',
+          outputTemplate = '&#123;{code}&#125;<span>&nbsp;</span>';///<span>&nbsp;</span>';
+
+        var autocomplete = new CKEDITOR.plugins.autocomplete(evt.editor, {
+          textTestCallback: textTestCallback,
+          dataCallback: dataCallback,
+          itemTemplate: itemTemplate,
+          outputTemplate: outputTemplate
+        });
+
+        // Override default getHtmlToInsert to enable rich content output.
+        autocomplete.getHtmlToInsert = function (item) {
+          return this.outputTemplate.output(item);
+        }
+      }
+    }
+  });
+  wees.on('instanceReady', function () {
+    /*wees.validAvar().then(function (msg) {
+      console.log('msg', msg);
+    });*/
+
+    wees.on('change', function (evt) {
+
+
+      var myFnc = function () {
+        evt.editor.validAvar().then(function (msg) {
+          var m = "== [Nepovolené tagy]== \n";
+          msg.invalid.forEach(function (invalid) {
+            m += "\t'" + invalid.code + "' na pozici: " + invalid.position + " \n";
+          });
+          m += "== [chybějící povinné tagy]==\n";
+          msg.missing.forEach(function (missing) {
+            m += "\t'" + missing.code + "' \n";
+          });
+          m += "== [použité tagy]==\n";
+          msg.used.forEach(function (used) {
+            m += "\t'" + used.avar.code + "'  na pozici: " + used.position + " \n";
+          });
+          document.getElementById('dump1').innerHTML = m;
+
+        })
+      };
+      clearTimeout(evt.editor.timeout);
+      evt.editor.timeout = setTimeout(myFnc, 500);
+
+    })
+
+  });
+
+
+  CKEDITOR.inline('editor2', {
+    extraPlugins: 'avars,link',
+    height: 100,
+    avars: A,
+    fullPage: true,
+    allowedContent: true,
+    on:{
+      change: function (evt) {
+        var myFnc = function () {
+          evt.editor.validAvar().then(function (msg) {
+            var m = "== [Nepovolené tagy]== \n";
+            msg.invalid.forEach(function (invalid) {
+              m += "\t'" + invalid.code + "' na pozici: " + invalid.position + " \n";
+            });
+            m += "== [chybějící povinné tagy]==\n";
+            msg.missing.forEach(function (missing) {
+              m += "\t'" + missing.code + "' \n";
+            });
+            m += "== [použité tagy]==\n";
+            msg.used.forEach(function (used) {
+              m += "\t'" + used.avar.code + "'  na pozici: " + used.position + " \n";
+            });
+            document.getElementById('dump2').innerHTML = m;
+
+          })
+        };
+        clearTimeout(evt.editor.timeout);
+        evt.editor.timeout = setTimeout(myFnc, 500);
+      }
+    }
+  });
+
+
+  CKEDITOR.replace('editor3', {
+    extraPlugins: 'avars,divarea, link, sourcearea,autogrow,autocomplete,textmatch',
+    height: 100,
+    avars: A,
+    fullPage: true,
+    allowedContent: true,
+
+    on: {
+      instanceReady: function (evt) {
+        var itemTemplate = '<li data-id="{id}">' +
+          '<div><strong class="item-title">{text}</strong></div>' +
+          '<div><i>{desc}</i></div>' +
+          '</li>',
+          outputTemplate = '&#123;{code}&#125;&nbsp;';///<span>&nbsp;</span>';
+
+        var autocomplete = new CKEDITOR.plugins.autocomplete(evt.editor, {
+          textTestCallback: textTestCallback,
+          dataCallback: dataCallback,
+          itemTemplate: itemTemplate,
+          outputTemplate: outputTemplate
+        });
+
+        // Override default getHtmlToInsert to enable rich content output.
+        autocomplete.getHtmlToInsert = function (item) {
+          return this.outputTemplate.output(item);
+        }
+      },
+      change: function (evt) {
+        var myFnc = function () {
+          evt.editor.validAvar().then(function (msg) {
+            var m = "== [Nepovolené tagy]== \n";
+            msg.invalid.forEach(function (invalid) {
+              m += "\t'" + invalid.code + "' na pozici: " + invalid.position + " \n";
+            });
+            m += "== [chybějící povinné tagy]==\n";
+            msg.missing.forEach(function (missing) {
+              m += "\t'" + missing.code + "' \n";
+            });
+            m += "== [použité tagy]==\n";
+            msg.used.forEach(function (used) {
+              m += "\t'" + used.avar.code + "'  na pozici: " + used.position + " \n";
+            });
+            document.getElementById('dump3').innerHTML = m;
+
+          })
+        };
+        clearTimeout(evt.editor.timeout);
+        evt.editor.timeout = setTimeout(myFnc, 500);
+      }
+    }
+  });
+
+  function textTestCallback(range) {
+    if (!range.collapsed) {
+      return null;
+    }
+
+    return CKEDITOR.plugins.textMatch.match(range, matchCallback);
+  }
+
+  function matchCallback(text, offset) {
+    var pattern = /\{{1}([A-z]|\})*$/,
+      match = text.slice(0, offset)
+        .match(pattern);
+
+    if (!match) {
+      return null;
+    }
+
+    return {
+      start: match.index,
+      end: offset
+    };
+  }
+
+  function dataCallback(matchInfo, callback) {
+    var data = A.filter(function (item) {
+      return item.type == "normal";
+    }).filter(function (item) {
+      var itemName = '{' + item.code + '}';
+      return itemName.indexOf(matchInfo.query.toLowerCase()) == 0;
+    });
+
+    callback(data);
+  }
+
+
+  /*CKCONSOLE.create('widget', {editor : 'editor1'});
+  CKCONSOLE.create('focus', {editor : 'editor1'});
+  CKCONSOLE.create( 'widget', { editor: 'editor2' } );
+  CKCONSOLE.create( 'focus', { editor: 'editor2' } );
+  CKCONSOLE.create( 'widget', { editor: 'editor3' } );
+  CKCONSOLE.create( 'focus', { editor: 'editor3' } );*/
+
+
+  //https://sdk.ckeditor.com/samples/draganddrop.html#
+  CKEDITOR.on('instanceReady', function () {
+    CKEDITOR.document.getById('avarsList').on('dragstart', function (evt) {
+      var target = evt.data.getTarget().getAscendant('div', true);
+      CKEDITOR.plugins.clipboard.initDragDataTransfer(evt);
+      var dataTransfer = evt.data.dataTransfer;
+      //dataTransfer.setData('avar', A[target.data('avarId')]);
+
+      if (target.data('avar-url') === 'yes') {
+        //dataTransfer.setData('avar', target.data('avar'));
+        var html = '<a href="{' + target.data('avar') + '}">' + target.data('avar-label') + '</a>';
+        //console.log('html', html);
+        dataTransfer.setData('text/html', html);
+      } else {
+        dataTransfer.setData('avar', target.data('avar'));
+        dataTransfer.setData('text/html', target.getText());
+      }
+      /*if ( dataTransfer.$.setDragImage ) {
+          dataTransfer.$.setDragImage( target.findOne( 'img' ).$, 0, 0 );
+      }*/
+    })
+  })
+</script>
+</body>
+</html>
+
+
+// nice : url -> cmslink: https://github.com/die-antwort/ckeditor/commit/92c81c7eb1ce65584e8bf9c3b8571358d26d17fe
